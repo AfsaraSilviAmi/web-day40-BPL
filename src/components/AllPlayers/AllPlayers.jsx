@@ -1,27 +1,40 @@
 import React, { use } from 'react';
-import UserImg from '../../assets/user-1.png'
+import { FaFlag, FaUser } from 'react-icons/fa6';
 
 const AllPlayers = ({AllPlayerPromise}) => {
     const players = use(AllPlayerPromise)
     return (
-        <div className='w-11/12 mx-auto'>
+        <div className='w-11/12 mx-auto grid md:grid-cols-3 gap-6'>
            {
-             players.map(player => <div className="card bg-base-100 w-96 shadow-sm p-4">
+             players.map(player => <div className="card bg-base-100 shadow-sm p-2">
   <figure>
-    <img
+    <img className='rounded-lg w-full h-48 object-cover'
       src={player.image}
       alt="Cricket Players" />
   </figure>
-  <div className="">
-    <div className='flex mt-2'>
-        <img src={UserImg} alt="" />
+  
+  <div>
+    <p className='card-title mt-2'><FaUser/>{player.name}</p>
+    <div className='flex justify-between mt-3'>
+      <p className='flex items-center text-gray-400 gap-1'><FaFlag/>{player.country}</p>
+      <button className='btn'>{player.role}</button>
     </div>
-    
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-    <div className="card-actions justify-end">
-      <button className="btn btn-primary">Buy Now</button>
+    <div className="divider"></div>
+    <div className='flex justify-between mb-2'>
+         <p className='font-bold'>Rating</p>
+         <p>{player.rating}</p>
+    </div>
+    <div className='flex justify-between mb-2'>
+         <p className='font-bold'>{player.battingType}</p>
+         <p className='text-gray-400'>{player.bowlingType}</p>
+    </div>
+    <div className='flex justify-between mt-3 items-center mb-4'>
+         <p className='font-bold'>Price: ${player.biddingPrice}</p>
+         <button className='btn'>Choose Player</button>
     </div>
   </div>
+  
+
 </div>)
            }
         </div>
