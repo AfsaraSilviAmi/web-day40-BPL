@@ -1,42 +1,27 @@
-import React, { use } from 'react';
-import { FaFlag, FaUser } from 'react-icons/fa6';
+import React, { use, useState } from 'react';
+import AvailablePlayers from '../AvailablePlayers/AvailablePlayers';
+import SelectedPlayer from '../selected/SelectedPlayer';
 
-const AllPlayers = ({AllPlayerPromise}) => {
+const AllPlayers = ({AllPlayerPromise, setCoin, coin}) => {
     const players = use(AllPlayerPromise)
+    const [playerTog, setPlayerTog]= useState("available");
+    const[selectPlay, setSelectPlay] = useState([]);
+    
     return (
-        <div className='w-11/12 mx-auto grid md:grid-cols-3 gap-6'>
-           {
-             players.map(player => <div className="card bg-base-100 shadow-sm p-2">
-  <figure>
-    <img className='rounded-lg w-full h-48 object-cover'
-      src={player.image}
-      alt="Cricket Players" />
-  </figure>
-  
-  <div>
-    <p className='card-title mt-2'><FaUser/>{player.name}</p>
-    <div className='flex justify-between mt-3'>
-      <p className='flex items-center text-gray-400 gap-1'><FaFlag/>{player.country}</p>
-      <button className='btn'>{player.role}</button>
-    </div>
-    <div className="divider"></div>
-    <div className='flex justify-between mb-2'>
-         <p className='font-bold'>Rating</p>
-         <p>{player.rating}</p>
-    </div>
-    <div className='flex justify-between mb-2'>
-         <p className='font-bold'>{player.battingType}</p>
-         <p className='text-gray-400'>{player.bowlingType}</p>
-    </div>
-    <div className='flex justify-between mt-3 items-center mb-4'>
-         <p className='font-bold'>Price: ${player.biddingPrice}</p>
-         <button className='btn'>Choose Player</button>
-    </div>
-  </div>
-  
-
-</div>)
-           }
+        <div>
+           <div className='flex justify-between items-center w-11/12 mx-auto my-4'>
+             {
+                playerTog === "available" ? (<h2 className='font-bold text-2xl'>Available Players</h2>) : (<h2 className='font-bold text-2xl'>Selected Players({selectPlay.length}/{players.length})</h2>)
+             }
+            <div className="join grid grid-cols-2">
+  <button onClick={()=>setPlayerTog("available")} className={`join-item btn ${playerTog === "available" ? "bg-[#E7FE29]" : ""}`}>Available</button>
+  <button onClick={()=>setPlayerTog("selected")} className={`join-item btn ${playerTog === "selected" ? "bg-[#E7FE29]" : ""}`}>Selected({selectPlay.length})</button>
+</div>
+        </div>
+        {
+          playerTog === "available"? (<AvailablePlayers players={players} setCoin={setCoin} coin={coin} setSelectPlay={setSelectPlay} selectPlay={selectPlay}></AvailablePlayers>): (<SelectedPlayer selectPlay={selectPlay}></SelectedPlayer>)
+        }
+           
         </div>
     );
 };
