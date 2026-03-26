@@ -3,6 +3,8 @@ import './App.css'
 import AllPlayers from './components/AllPlayers/AllPlayers'
 import Navbar from './components/Navbar/Navbar'
 import Banner from './components/Banner/Banner';
+import { ToastContainer } from 'react-toastify';
+import Footer from './components/Footer/Footer';
 
 
 function App() {
@@ -18,6 +20,9 @@ function App() {
         }>
         <AllPlayers AllPlayerPromise={AllPlayerPromise} setCoin = {setCoin} coin={coin}></AllPlayers>
       </Suspense>
+      <Footer></Footer>
+
+       <ToastContainer/>
     </>
   )
 }

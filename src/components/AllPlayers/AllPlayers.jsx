@@ -9,7 +9,7 @@ const AllPlayers = ({AllPlayerPromise, setCoin, coin}) => {
     
     return (
         <div>
-           <div className='flex justify-between items-center w-11/12 mx-auto my-4'>
+           <div className='md:flex justify-between items-center w-11/12 mx-auto my-4'>
              {
                 playerTog === "available" ? (<h2 className='font-bold text-2xl'>Available Players</h2>) : (<h2 className='font-bold text-2xl'>Selected Players({selectPlay.length}/{players.length})</h2>)
              }
@@ -19,7 +19,7 @@ const AllPlayers = ({AllPlayerPromise, setCoin, coin}) => {
 </div>
         </div>
         {
-          playerTog === "available"? (<AvailablePlayers players={players} setCoin={setCoin} coin={coin} setSelectPlay={setSelectPlay} selectPlay={selectPlay}></AvailablePlayers>): (<SelectedPlayer selectPlay={selectPlay}></SelectedPlayer>)
+          playerTog === "available"? (<AvailablePlayers players={players} setCoin={setCoin} coin={coin} setSelectPlay={setSelectPlay} selectPlay={selectPlay}></AvailablePlayers>): (<SelectedPlayer selectPlay={selectPlay} setSelectPlay={setSelectPlay} setCoin={setCoin}></SelectedPlayer>)
         }
            
         </div>

@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaFlag, FaUser } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
 
 const Card = ({player, setCoin, coin, selectPlay, setSelectPlay}) => {
-    const [choose, setChoose] = useState(false);
+  const isSelected = selectPlay.find(p =>p.playerId === player.playerId)
 
     const handleChoosePlayer = () =>{
         const newCoin = coin -player.biddingPrice;
          if(newCoin>=0){
            setCoin(coin -player.biddingPrice);
          }else{
-            alert("Not enough Coins");
+            toast.error("Not enough Coins");
             return;
             
          }
-         alert(`${player.name} is Selected`)
-         setChoose(true);
+         toast.success(`${player.name} is Selected`)
+       
          setSelectPlay([...selectPlay, player])
          
          
@@ -45,7 +46,7 @@ const Card = ({player, setCoin, coin, selectPlay, setSelectPlay}) => {
     </div>
     <div className='flex justify-between mt-3 items-center mb-4'>
          <p className='font-bold'>Price: ${player.biddingPrice}</p>
-         <button className='btn' onClick={handleChoosePlayer} disabled={choose? true : false}>{choose === true ? "Selected" : "Choose Player"}</button>
+         <button className='btn' onClick={handleChoosePlayer} disabled={isSelected}>{isSelected? "Selected" : "Choose Player"}</button>
     </div>
   </div>
   
